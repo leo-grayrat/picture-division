@@ -1,41 +1,46 @@
-/* Hallmark · tokens · picture-division */
+/* Bangumi animation-section values localized for this tool. */
 :root {
-  --color-paper: oklch(97% 0.01 92);
-  --color-panel: oklch(100% 0 0);
-  --color-ink: oklch(22% 0.02 245);
-  --color-muted: oklch(49% 0.025 245);
-  --color-rule: oklch(84% 0.018 245);
-  --color-rule-strong: oklch(63% 0.03 245);
-  --color-accent: oklch(54% 0.16 172);
-  --color-accent-strong: oklch(42% 0.14 172);
-  --color-blackout: oklch(0% 0 0);
-  --color-focus: oklch(62% 0.19 172);
-  --color-danger: oklch(55% 0.18 29);
+  --color-page: #ffffff;
+  --color-text: #000000;
+  --color-body: #444444;
+  --color-heading: #555555;
+  --color-muted: #777777;
+  --color-rule: #eeeeee;
+  --color-input-border: #cccccc;
+  --color-pink: #f09199;
+  --color-blue: #0084b4;
+  --color-hover-blue: #369cf8;
+  --color-focus: #369cf8;
+  --color-drag: #fff6f7;
+  --color-disabled: #dddddd;
+  --color-blackout: #000000;
 
-  --font-display: Georgia, "Times New Roman", serif;
-  --font-body: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+  --font-ui: "SF Pro SC", "SF Pro Display", "PingFang SC", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif, "Hiragino Sans GB";
 
-  --space-2xs: 4px;
-  --space-xs: 8px;
-  --space-sm: 12px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
+  --space-2xs: 2px;
+  --space-xs: 5px;
+  --space-sm: 10px;
+  --space-md: 15px;
+  --space-lg: 20px;
+  --space-xl: 30px;
+  --space-button-x: 25px;
+  --space-input-y: 4px;
 
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.5rem;
-  --text-display: clamp(2rem, 5vw, 4rem);
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-section: 15px;
+  --text-title: 20px;
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --line-body: 18px;
+  --line-copy: 23px;
+  --line-input: 20px;
+  --line-title: 26px;
+
+  --radius-input: 3px;
+  --radius-pill: 50px;
   --rule-thin: 1px;
-  --rule-grid: 2px;
 
   --dur-fast: 120ms;
-  --dur-med: 180ms;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: ease-in-out;
 }
