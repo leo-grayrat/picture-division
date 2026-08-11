@@ -336,11 +336,48 @@ canvas.is-empty {
   overflow-wrap: anywhere;
 }
 
+.page-footer {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-sm) var(--space-lg);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  line-height: var(--line-body);
+}
+
+.page-footer a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.page-footer a:hover,
+.page-footer a:focus-visible {
+  color: var(--color-blue);
+  text-decoration: underline;
+}
+
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.source-link svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
 @media (max-width: 820px) {
   .main-wrapper {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
     padding: 0 var(--space-md) var(--space-lg);
+  }
+
+  .page-footer {
+    padding-right: var(--space-md);
+    padding-left: var(--space-md);
   }
 
   .control-panel {
@@ -350,6 +387,11 @@ canvas.is-empty {
 
 @media (max-width: 480px) {
   .main-wrapper {
+    padding-right: var(--space-sm);
+    padding-left: var(--space-sm);
+  }
+
+  .page-footer {
     padding-right: var(--space-sm);
     padding-left: var(--space-sm);
   }
