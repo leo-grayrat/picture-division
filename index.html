@@ -8,63 +8,78 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <main class="app-shell">
-      <section class="workspace" aria-label="图片遮蔽工作区">
-        <div class="stage-header">
+    <main class="main-wrapper">
+      <section class="workspace column-main" aria-label="图片遮蔽工作区">
+        <header class="page-header">
           <div>
             <h1>图片分割遮蔽翻开工具</h1>
             <p>导入截图，切成网格，现场一格一格翻开。</p>
           </div>
-          <button class="secondary-button" id="resetButton" type="button" disabled>全部遮蔽</button>
-        </div>
+          <button class="button-link" id="resetButton" type="button" disabled>全部遮蔽</button>
+        </header>
 
-        <div class="stage" id="dropZone">
-          <canvas id="imageCanvas" aria-label="可交互图片画布"></canvas>
-          <div class="empty-state" id="emptyState">
-            <strong>拖入图片，或从右侧选择文件</strong>
-            <span>支持浏览器可读取的常见图片格式</span>
+        <section class="stage-section" aria-labelledby="stageTitle">
+          <div class="section-heading">
+            <h2 id="stageTitle">竞猜画面</h2>
+            <span id="gridStatus">4 x 5</span>
           </div>
-        </div>
+          <div class="stage" id="dropZone">
+            <canvas id="imageCanvas" aria-label="可交互图片画布"></canvas>
+            <div class="empty-state" id="emptyState">
+              <strong>拖入图片，或从右侧选择文件</strong>
+              <span>支持浏览器可读取的常见图片格式</span>
+            </div>
+          </div>
+        </section>
       </section>
 
-      <aside class="control-panel" aria-label="操作面板">
-        <label class="file-picker">
-          <span>选择图片</span>
-          <input id="fileInput" type="file" accept="image/*">
-        </label>
-
-        <div class="grid-controls" aria-label="网格设置">
-          <label>
-            <span>行数</span>
-            <input id="rowsInput" type="number" min="1" max="20" value="4">
+      <aside class="control-panel column-side" aria-label="操作面板">
+        <section class="tool-section" aria-labelledby="imageSettingsTitle">
+          <h2 id="imageSettingsTitle">图片</h2>
+          <label class="file-picker">
+            <span class="button-primary">选择图片</span>
+            <input class="file-picker-input" id="fileInput" type="file" accept="image/*">
           </label>
-          <label>
-            <span>列数</span>
-            <input id="colsInput" type="number" min="1" max="20" value="5">
-          </label>
-        </div>
+          <p class="section-note">也可直接将图片拖入左侧画面。</p>
+        </section>
 
-        <div class="button-stack">
-          <button id="applyGridButton" type="button">应用网格</button>
-          <button id="randomRevealButton" type="button" disabled>随机翻开一个</button>
-          <button id="revealAllButton" type="button" disabled>全部翻开</button>
-          <button id="exportButton" type="button" disabled>导出当前图片</button>
-        </div>
+        <section class="tool-section" aria-labelledby="gridSettingsTitle">
+          <h2 id="gridSettingsTitle">网格设置</h2>
+          <div class="grid-controls" aria-label="网格设置">
+            <label>
+              <span>行数</span>
+              <input id="rowsInput" type="number" min="1" max="20" value="4">
+            </label>
+            <label>
+              <span>列数</span>
+              <input id="colsInput" type="number" min="1" max="20" value="5">
+            </label>
+          </div>
+          <button class="button-primary button-full" id="applyGridButton" type="button">应用网格</button>
+        </section>
 
-        <dl class="status-list">
-          <div>
-            <dt>网格</dt>
-            <dd id="gridStatus">4 x 5</dd>
+        <section class="tool-section" aria-labelledby="actionsTitle">
+          <h2 id="actionsTitle">翻开与导出</h2>
+          <div class="action-list">
+            <button class="button-link" id="randomRevealButton" type="button" disabled>随机翻开一个</button>
+            <button class="button-link" id="revealAllButton" type="button" disabled>全部翻开</button>
+            <button class="button-primary button-full" id="exportButton" type="button" disabled>导出当前图片</button>
           </div>
-          <div>
-            <dt>已翻开</dt>
-            <dd id="revealedStatus">0 / 20</dd>
-          </div>
-          <div>
-            <dt>状态</dt>
-            <dd id="messageStatus">等待导入图片</dd>
-          </div>
-        </dl>
+        </section>
+
+        <section class="tool-section status-panel" aria-labelledby="statusTitle">
+          <h2 id="statusTitle">当前状态</h2>
+          <dl class="status-list">
+            <div>
+              <dt>已翻开</dt>
+              <dd id="revealedStatus">0 / 20</dd>
+            </div>
+            <div>
+              <dt>状态</dt>
+              <dd id="messageStatus">等待导入图片</dd>
+            </div>
+          </dl>
+        </section>
       </aside>
     </main>
 
