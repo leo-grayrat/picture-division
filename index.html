@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图片分割遮蔽翻开工具</title>
+    <link rel="stylesheet" href="tokens.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="图片遮蔽工作区">
+        <div class="stage-header">
+          <div>
+            <h1>图片分割遮蔽翻开工具</h1>
+            <p>导入截图，切成网格，现场一格一格翻开。</p>
+          </div>
+          <button class="secondary-button" id="resetButton" type="button" disabled>全部遮蔽</button>
+        </div>
+
+        <div class="stage" id="dropZone">
+          <canvas id="imageCanvas" aria-label="可交互图片画布"></canvas>
+          <div class="empty-state" id="emptyState">
+            <strong>拖入图片，或从右侧选择文件</strong>
+            <span>支持浏览器可读取的常见图片格式</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="control-panel" aria-label="操作面板">
+        <label class="file-picker">
+          <span>选择图片</span>
+          <input id="fileInput" type="file" accept="image/*">
+        </label>
+
+        <div class="grid-controls" aria-label="网格设置">
+          <label>
+            <span>行数</span>
+            <input id="rowsInput" type="number" min="1" max="20" value="4">
+          </label>
+          <label>
+            <span>列数</span>
+            <input id="colsInput" type="number" min="1" max="20" value="5">
+          </label>
+        </div>
+
+        <div class="button-stack">
+          <button id="applyGridButton" type="button">应用网格</button>
+          <button id="randomRevealButton" type="button" disabled>随机翻开一个</button>
+          <button id="revealAllButton" type="button" disabled>全部翻开</button>
+          <button id="exportButton" type="button" disabled>导出当前图片</button>
+        </div>
+
+        <dl class="status-list">
+          <div>
+            <dt>网格</dt>
+            <dd id="gridStatus">4 x 5</dd>
+          </div>
+          <div>
+            <dt>已翻开</dt>
+            <dd id="revealedStatus">0 / 20</dd>
+          </div>
+          <div>
+            <dt>状态</dt>
+            <dd id="messageStatus">等待导入图片</dd>
+          </div>
+        </dl>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

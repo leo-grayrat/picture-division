@@ -1,0 +1,41 @@
+/* Hallmark · tokens · picture-division */
+:root {
+  --color-paper: oklch(97% 0.01 92);
+  --color-panel: oklch(100% 0 0);
+  --color-ink: oklch(22% 0.02 245);
+  --color-muted: oklch(49% 0.025 245);
+  --color-rule: oklch(84% 0.018 245);
+  --color-rule-strong: oklch(63% 0.03 245);
+  --color-accent: oklch(54% 0.16 172);
+  --color-accent-strong: oklch(42% 0.14 172);
+  --color-blackout: oklch(0% 0 0);
+  --color-focus: oklch(62% 0.19 172);
+  --color-danger: oklch(55% 0.18 29);
+
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-display: clamp(2rem, 5vw, 4rem);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --rule-thin: 1px;
+  --rule-grid: 2px;
+
+  --dur-fast: 120ms;
+  --dur-med: 180ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
