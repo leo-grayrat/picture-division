@@ -17,8 +17,8 @@ const messageStatus = document.querySelector("#messageStatus");
 const state = {
   image: null,
   imageName: "anime-guess",
-  rows: 4,
-  cols: 5,
+  rows: 5,
+  cols: 9,
   revealed: [],
   step: 0,
   hoverIndex: -1,
