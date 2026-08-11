@@ -41,9 +41,9 @@ input:focus-visible,
 
 .main-wrapper {
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
+  grid-template-columns: minmax(0, 1fr) 260px;
   gap: var(--space-xl);
-  width: min(100%, 1200px);
+  width: min(100%, 1000px);
   min-height: 100vh;
   margin: 0 auto;
   padding: 0 var(--space-sm) var(--space-lg);
@@ -222,10 +222,6 @@ canvas.is-empty {
   background: var(--color-pink);
 }
 
-.button-full {
-  width: 100%;
-}
-
 .button-link {
   display: inline-block;
   padding: var(--space-xs) 0;
@@ -308,8 +304,7 @@ canvas.is-empty {
   padding-top: var(--space-xs);
 }
 
-.action-list .button-full {
-  justify-self: stretch;
+.action-list .button-primary {
   margin-top: var(--space-sm);
 }
 
