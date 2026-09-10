@@ -19,7 +19,8 @@ const showModeControls = document.querySelector("#showModeControls");
 const showQuestionStatus = document.querySelector("#showQuestionStatus");
 const prevQuestionButton = document.querySelector("#prevQuestionButton");
 const nextQuestionButton = document.querySelector("#nextQuestionButton");
-const { loadFirstShowImage } = window.PictureDivisionShowMode;
+
+const SHOW_IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "webp"];
 
 const state = {
   image: null,
@@ -202,7 +203,7 @@ async function loadShowQuestion(questionNumber) {
   showQuestionStatus.textContent = `第 ${questionNumber} 题`;
   updateStatus(`正在读取第 ${questionNumber} 题`);
 
-  const result = await loadFirstShowImage(questionNumber, loadImageFromPath);
+  const result = await loadFirstShowImage(questionNumber);
 
   if (!result) {
     if (state.image) draw();
@@ -231,6 +232,19 @@ async function loadShowQuestion(questionNumber) {
   nextQuestionButton.disabled = false;
   showQuestionStatus.textContent = `第 ${questionNumber} 题`;
   updateStatus(`第 ${questionNumber} 题已载入，当前为全遮蔽`);
+}
+
+async function loadFirstShowImage(index) {
+  for (const extension of SHOW_IMAGE_EXTENSIONS) {
+    const src = `show/${index}.${extension}`;
+    try {
+      const image = await loadImageFromPath(src);
+      return { src, image };
+    } catch {
+      // Try the next supported extension.
+    }
+  }
+  return null;
 }
 
 function loadImageFromPath(src) {
