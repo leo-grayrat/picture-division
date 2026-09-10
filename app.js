@@ -13,6 +13,13 @@ const dropZone = document.querySelector("#dropZone");
 const gridStatus = document.querySelector("#gridStatus");
 const revealedStatus = document.querySelector("#revealedStatus");
 const messageStatus = document.querySelector("#messageStatus");
+const manualImageControls = document.querySelector("#manualImageControls");
+const showModeButton = document.querySelector("#showModeButton");
+const showModeControls = document.querySelector("#showModeControls");
+const showQuestionStatus = document.querySelector("#showQuestionStatus");
+const prevQuestionButton = document.querySelector("#prevQuestionButton");
+const nextQuestionButton = document.querySelector("#nextQuestionButton");
+const { loadFirstShowImage } = window.PictureDivisionShowMode;
 
 const state = {
   image: null,
@@ -22,6 +29,8 @@ const state = {
   revealed: [],
   step: 0,
   hoverIndex: -1,
+  showMode: false,
+  question: 0,
 };
 
 canvas.classList.add("is-empty");
@@ -35,6 +44,7 @@ fileInput.addEventListener("change", (event) => {
 
 dropZone.addEventListener("dragover", (event) => {
   event.preventDefault();
+  if (state.showMode) return;
   dropZone.classList.add("is-dragging");
 });
 
@@ -45,6 +55,8 @@ dropZone.addEventListener("dragleave", () => {
 dropZone.addEventListener("drop", (event) => {
   event.preventDefault();
   dropZone.classList.remove("is-dragging");
+  if (state.showMode) return;
+
   const [file] = event.dataTransfer.files;
   if (!file) return;
   if (!file.type.startsWith("image/")) {
@@ -52,6 +64,32 @@ dropZone.addEventListener("drop", (event) => {
     return;
   }
   loadImageFile(file);
+});
+
+showModeButton.addEventListener("click", async () => {
+  if (state.showMode) {
+    state.showMode = false;
+    state.question = 0;
+    manualImageControls.hidden = false;
+    showModeControls.hidden = true;
+    showModeButton.textContent = "展示模式";
+    updateStatus("已退出展示模式");
+    return;
+  }
+
+  state.showMode = true;
+  manualImageControls.hidden = true;
+  showModeControls.hidden = false;
+  showModeButton.textContent = "退出展示模式";
+  await loadShowQuestion(1);
+});
+
+prevQuestionButton.addEventListener("click", async () => {
+  if (state.question > 1) await loadShowQuestion(state.question - 1);
+});
+
+nextQuestionButton.addEventListener("click", async () => {
+  await loadShowQuestion(state.question + 1);
 });
 
 applyGridButton.addEventListener("click", () => {
@@ -155,6 +193,62 @@ exportButton.addEventListener("click", () => {
   draw();
   updateStatus("已导出当前图片");
 });
+
+async function loadShowQuestion(questionNumber) {
+  coverCanvas();
+  showModeButton.disabled = true;
+  prevQuestionButton.disabled = true;
+  nextQuestionButton.disabled = true;
+  showQuestionStatus.textContent = `第 ${questionNumber} 题`;
+  updateStatus(`正在读取第 ${questionNumber} 题`);
+
+  const result = await loadFirstShowImage(questionNumber, loadImageFromPath);
+
+  if (!result) {
+    if (state.image) draw();
+    showModeButton.disabled = false;
+    prevQuestionButton.disabled = state.question <= 1;
+    nextQuestionButton.disabled = true;
+    showQuestionStatus.textContent = state.question ? `第 ${state.question} 题` : `第 ${questionNumber} 题`;
+    updateStatus(`未找到第 ${questionNumber} 题`);
+    return;
+  }
+
+  state.image = result.image;
+  state.imageName = `show-${questionNumber}`;
+  state.question = questionNumber;
+  canvas.width = result.image.naturalWidth;
+  canvas.height = result.image.naturalHeight;
+  canvas.classList.remove("is-empty");
+  emptyState.classList.add("is-hidden");
+  applyGridFromInputs();
+  resetRevealed();
+  setControlsEnabled(true);
+  draw();
+
+  showModeButton.disabled = false;
+  prevQuestionButton.disabled = questionNumber <= 1;
+  nextQuestionButton.disabled = false;
+  showQuestionStatus.textContent = `第 ${questionNumber} 题`;
+  updateStatus(`第 ${questionNumber} 题已载入，当前为全遮蔽`);
+}
+
+function loadImageFromPath(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", reject);
+    image.src = src;
+  });
+}
+
+function coverCanvas() {
+  if (!state.image) return;
+  ctx.save();
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.restore();
+}
 
 function loadImageFile(file) {
   const reader = new FileReader();
