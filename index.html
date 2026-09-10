@@ -36,11 +36,22 @@
       <aside class="control-panel column-side" aria-label="操作面板">
         <section class="tool-section" aria-labelledby="imageSettingsTitle">
           <h2 id="imageSettingsTitle">图片</h2>
-          <label class="file-picker">
-            <span class="button-primary">选择图片</span>
-            <input class="file-picker-input" id="fileInput" type="file" accept="image/*">
-          </label>
-          <p class="section-note">也可直接将图片拖入左侧画面。</p>
+          <div id="manualImageControls">
+            <label class="file-picker">
+              <span class="button-primary">选择图片</span>
+              <input class="file-picker-input" id="fileInput" type="file" accept="image/*">
+            </label>
+            <p class="section-note">也可直接将图片拖入左侧画面。</p>
+          </div>
+          <button class="button-link" id="showModeButton" type="button">展示模式</button>
+          <div id="showModeControls" hidden>
+            <p class="section-note" id="showQuestionStatus">第 1 题</p>
+            <div class="action-list">
+              <button class="button-link" id="prevQuestionButton" type="button" disabled>上一题</button>
+              <button class="button-link" id="nextQuestionButton" type="button" disabled>下一题</button>
+            </div>
+            <p class="section-note">读取 show/1、show/2……，依次尝试 png、jpg、jpeg、webp。</p>
+          </div>
         </section>
 
         <section class="tool-section" aria-labelledby="gridSettingsTitle">
@@ -93,6 +104,7 @@
       </a>
     </footer>
 
+    <script src="show-mode.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
